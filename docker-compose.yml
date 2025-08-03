@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: vue3-node-app
+    ports:
+      - "80:5173"
+    volumes:  
+      - ./src:/app/src
