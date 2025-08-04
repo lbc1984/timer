@@ -1,58 +1,55 @@
 <template>
-    <div class="w-full max-w-2xl p-6 space-y-6">
-        <h2 class="text-2xl sm:text-4xl font-bold text-gray-800 text-center">⏰ Hẹn giờ bật</h2>
+    <div class="w-full max-w4xl p10 space-y-10 sm:text-5xl md:text-5xl lg:text-xl">
+        <h2 class="text-6xl lg:text-4xl font-bold text-gray-800 text-center">⏰ Hẹn giờ bật</h2>
 
-        <div v-for="(time, index) in times" :key="index" class="flex flex-col sm:flex-row items-center gap-4">
-            <div class="flex flex-1 items-center gap-3">
-                <label class="text-gray-600 text-lg">Giờ</label>
+        <div v-for="(time, index) in times" :key="index" class="flex flex-col sm:flex-row items-center gap-6">
+            <div class="flex flex-1 items-center gap-6">
+                <label class="text-gray-600">Giờ</label>
                 <input v-model.number="time.hour" type="number" min="0" max="23" @change="scheduleStart"
-                    class="w-full p-3 text-lg border rounded-lg text-center" />
+                    class="w-full p-3 border rounded-2xl text-center text-4xl" />
             </div>
-            <div class="flex flex-1 items-center gap-3">
-                <label class="text-gray-600 text-lg">Phút</label>
+            <div class="flex flex-1 items-center gap-6">
+                <label class="text-gray-600">Phút</label>
                 <input v-model.number="time.minute" type="number" min="0" max="59" @change="scheduleStart"
-                    class="w-full p-3 text-lg border rounded-lg text-center" />
+                    class="w-full p-3 border rounded-2xl text-center text-4xl" />
             </div>
             <button v-if="times.length > 1" @click="removeTime(index)"
-                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-lg">
-                ✕
-            </button>
+                class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-2xl">✕</button>
         </div>
 
-        <div v-if="duplicateMessage" class="text-red-600 text-center text-base">
+        <div v-if="duplicateMessage" class="text-red-600 text-center">
             {{ duplicateMessage }}
         </div>
 
-        <button @click="addTime"
-            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-xl text-lg font-semibold">
-            ➕ Thêm giờ bật
-        </button>
-
-        <div>
-            <label class="text-lg text-gray-600">Tự tắt sau (giây)</label>
-            <input v-model.number="autoOffSeconds" type="number" min="1"
-                class="w-full p-3 text-lg border rounded-lg text-center mt-2" />
+        <div class="flex justify-center">
+            <button @click="addTime"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-10 rounded-3xl sm:text-5xl md:text-5xl lg:text-xl font-semibold">
+                Thêm giờ bật
+            </button>
         </div>
 
-        <div v-if="scheduledTimes.length" class="text-lg text-gray-800 space-y-2">
+        <div class="flex flex-rol items-center">
+            <label class="text-gray-600">Tự tắt sau (giây)</label>
+            <input v-model.number="autoOffSeconds" type="number" min="1" class="w-full p-3 border rounded-2xl text-center text-4xl" />
+        </div>
+
+        <div v-if="scheduledTimes.length" class="text-gray-800 space-y-4">
             <div v-for="(t, i) in scheduledTimes" :key="i">
                 ⏳ Hẹn bật lúc: <strong>{{ t.time }}</strong>, sẽ tắt sau <strong>{{ autoOffSeconds }} giây</strong>
             </div>
         </div>
 
-        <div class="flex justify-center gap-4 pt-4">
-            <button @click="$emit('save', scheduleTime)"
-                class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-lg font-semibold">
+        <div class="flex justify-center gap-6">
+            <button @click="$emit('save', scheduleTime)" class="bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-2xl font-semibold">
                 💾 Lưu
             </button>
-            <button @click="$emit('close')"
-                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-3 rounded-xl text-lg font-semibold">
+            <button @click="$emit('close')" class="bg-gray-400 hover:bg-gray-500 text-white px-10 py-3 rounded-2xl font-semibold">
                 ❌ Hủy
             </button>
         </div>
-
     </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
