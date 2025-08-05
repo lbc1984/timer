@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full max-w4xl p10 space-y-10 sm:text-5xl md:text-5xl lg:text-xl">
-        <h2 class="text-6xl lg:text-4xl font-bold text-gray-800 text-center">⏰ Hẹn giờ bật</h2>
+    <div class="w-full max-w-1xl p-10 space-y-10 sm:text-3xl md:text-3xl lg:text-xl">
+        <h2 class="text-4xl font-bold text-gray-800 text-center">⏰ Hẹn giờ bật</h2>
 
         <div v-for="(time, index) in times" :key="index" class="flex flex-col sm:flex-row items-center gap-6">
             <div class="flex flex-1 items-center gap-6">
@@ -23,17 +23,17 @@
 
         <div class="flex justify-center">
             <button @click="addTime"
-                class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-10 rounded-3xl sm:text-5xl md:text-5xl lg:text-xl font-semibold">
+                class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-10 rounded-3xl font-semibold">
                 Thêm giờ bật
             </button>
         </div>
 
-        <div class="flex flex-rol items-center">
-            <label class="text-gray-600">Tự tắt sau (giây)</label>
-            <input v-model.number="autoOffSeconds" type="number" min="1" class="w-full p-3 border rounded-2xl text-center text-4xl" />
+        <div class="flex flex-row items-center space-x-5">
+            <label class="text-gray-600 whitespace-nowrap">Tự tắt sau (giây)</label>
+            <input v-model.number="autoOffSeconds" type="number" min="1" class="p-3 border rounded-2xl text-center text-4xl lg:w-full md:w-[50%]" />
         </div>
 
-        <div v-if="scheduledTimes.length" class="text-gray-800 space-y-4">
+        <div v-if="scheduledTimes.length" class="text-gray-800 space-y-4 border-t-2 pt-6 border-gray-300">
             <div v-for="(t, i) in scheduledTimes" :key="i">
                 ⏳ Hẹn bật lúc: <strong>{{ t.time }}</strong>, sẽ tắt sau <strong>{{ autoOffSeconds }} giây</strong>
             </div>

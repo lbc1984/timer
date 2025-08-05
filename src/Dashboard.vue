@@ -1,7 +1,7 @@
 <template>
     <div class="p-6 bg-slate-300 w-screen h-screen">
-        <h1 class="text-6xl lg:text-3xl font-bold mb-10">Thiết bị của bạn</h1>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:text-xl text-5xl">
+        <h1 class="text-6xl lg:text-3xl font-bold mb-10 text-center">Thiết bị của bạn</h1>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:text-xl text-3xl">
             <div v-for="device in devices" :key="device.mac"
                 class="bg-white rounded-3xl shadow-xl p-10 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
                 <div class="flex justify-between items-center mb-8">
