@@ -1,17 +1,17 @@
 <template>
-    <div class="w-full max-w-1xl p-10 space-y-10 sm:text-3xl md:text-3xl lg:text-xl">
-        <h2 class="text-4xl font-bold text-gray-800 text-center">⏰ Hẹn giờ bật</h2>
+    <div class="w-full max-w-1xl lg:p-10 space-y-10 text-xl lg:text-xl">
+        <h2 class="text-4xl font-bold text-gray-800 text-center">⏰ {{ props.device.name }}</h2>
 
-        <div v-for="(time, index) in times" :key="index" class="flex flex-col sm:flex-row items-center gap-6">
+        <div v-for="(time, index) in times" :key="index" class="flex flex-row sm:flex-row items-center gap-6">
             <div class="flex flex-1 items-center gap-6">
                 <label class="text-gray-600">Giờ</label>
                 <input v-model.number="time.hour" type="number" min="0" max="23" @change="scheduleStart"
-                    class="w-full p-3 border rounded-2xl text-center text-4xl" />
+                    class="w-full p-3 border rounded-2xl text-center text-xl" />
             </div>
             <div class="flex flex-1 items-center gap-6">
                 <label class="text-gray-600">Phút</label>
                 <input v-model.number="time.minute" type="number" min="0" max="59" @change="scheduleStart"
-                    class="w-full p-3 border rounded-2xl text-center text-4xl" />
+                    class="w-full p-3 border rounded-2xl text-center text-xl" />
             </div>
             <button v-if="times.length > 1" @click="removeTime(index)"
                 class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-2xl">✕</button>
@@ -29,8 +29,8 @@
         </div>
 
         <div class="flex flex-row items-center space-x-5">
-            <label class="text-gray-600 whitespace-nowrap">Tự tắt sau (giây)</label>
-            <input v-model.number="autoOffSeconds" type="number" min="1" class="p-3 border rounded-2xl text-center text-4xl lg:w-full md:w-[50%]" />
+            <label class="text-gray-600 lg:whitespace-nowrap" for="autoOffSeconds">Tự tắt sau (giây)</label>
+            <input v-model.number="autoOffSeconds" type="number" name="autoOffSeconds" min="1" class="p-3 border rounded-2xl text-center text-xl lg:w-full md:w-[25%]" />
         </div>
 
         <div v-if="scheduledTimes.length" class="text-gray-800 space-y-4 border-t-2 pt-6 border-gray-300">
@@ -58,6 +58,12 @@ const times = ref([{ hour: 7, minute: 0 }])
 const autoOffSeconds = ref(10)
 const scheduledTimes = ref([])
 const duplicateMessage = ref('')
+const props = defineProps({
+    device: {
+        type: Object,
+        required: true
+    }
+})
 
 let checkInterval = null
 let offTimeout = null

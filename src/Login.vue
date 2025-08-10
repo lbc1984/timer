@@ -4,7 +4,7 @@
       <h1 class="text-2xl font-bold mb-6 text-gray-800">Đăng nhập</h1>
       <button
         @click="loginWithGoogle"
-        class="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+        class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
       >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path
